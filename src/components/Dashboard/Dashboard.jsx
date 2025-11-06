@@ -24,7 +24,7 @@ const Dashboard = ({jobs}) => {
 		<main className="container">
 			<h1>Welcome, {user.username}</h1>
 			<p>
-				This is the dashboard page where you can see a list of all the users.
+				This is the dashboard page where you can see a list of all the Job lists.
 			</p>
       <table>
         <thead>
@@ -42,7 +42,7 @@ const Dashboard = ({jobs}) => {
         {jobs.map((job, index) => {
           return (
             <tr key={job._id}>
-                <Link>
+                <Link to={`/jobs/${job._id}`}>
               <th scope="row"> {job.jobTitle} </th>
                 </Link>
               <td>{ job.companyName}</td>

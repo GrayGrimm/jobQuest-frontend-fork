@@ -3,6 +3,7 @@ import { useContext, useState, useEffect } from "react";
 import { Routes, Route } from "react-router"; 
 import { UserContext } from "./contexts/UserContext";
 import * as jobService from "./services/jobService"
+import JobDetails from "./components/JobDetails/JobDetails";
 
 import NavBar from "./components/NavBar/NavBar";
 import SignUpForm from "./components/SignUpForm/SignUpForm";
@@ -25,9 +26,18 @@ const App = () => {
 		<>
 			<NavBar />
 			<Routes>
-				<Route path="/" element={user ? <Dashboard jobs={jobs} /> : <Landing />} />
-				<Route path="/sign-up" element={<SignUpForm />} />
-				<Route path="/sign-in" element={<SignInForm />} />
+				{user ? (
+				<>
+					<Route path="/" element={<Dashboard jobs={jobs} />} />
+					<Route path="/jobs/:jobId" element={<JobDetails />} />
+					</>
+				) : (
+				<>
+					<Route path="/" element={<Landing />} />
+					<Route path="/sign-up" element={<SignUpForm />} />
+					<Route path="/sign-in" element={<SignInForm />} />
+				</>
+				)}
 			</Routes>
 		</>
 	);
