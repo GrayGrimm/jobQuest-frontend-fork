@@ -2,6 +2,9 @@ import { useContext } from "react";
 import { useEffect, useState } from "react";
 import { UserContext } from "../../contexts/UserContext";
 import * as userService from "../../services/userService";
+import { Link } from "react-router";
+
+
 const Dashboard = ({jobs}) => {
 	const { user } = useContext(UserContext);
 	const [users, setUsers] = useState([]);
@@ -23,13 +26,35 @@ const Dashboard = ({jobs}) => {
 			<p>
 				This is the dashboard page where you can see a list of all the users.
 			</p>
-			<ul>
-			{jobs.map((job, index) => {
-				return (
-					<li>{job.jobTitle}</li>
-				)
-			})}
-			</ul>
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Job Title</th>
+            <th scope="col">Company</th>
+            <th scope="col">Company Website</th>
+            <th scope="col">Job Description</th>
+            <th scope="col">Date Applied</th>
+            <th scope="col">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+
+        {jobs.map((job, index) => {
+          return (
+            <tr key={job._id}>
+                <Link>
+              <th scope="row"> {job.jobTitle} </th>
+                </Link>
+              <td>{ job.companyName}</td>
+              <td>{ job.companyWebsite}</td>
+              <td>{ job.jobDescription}</td>
+              <td>{ job.dateApplied}</td>
+              <td>{ job.status}</td>
+            </tr>
+          )
+        })}
+      </tbody>
+			</table>
 		</main>
 	);
 };
